@@ -1,0 +1,23 @@
+{
+    "PRODUCTS": {
+        "VOUCHER": {
+            "PRICE": "5.00",
+            "DISCOUNT_ON_QUANTITY": "2",
+            "DISCOUNT_PRICE": "5.00",
+            "FREE_QUANTITY": "1"
+        },
+        "TSHIRT": {
+            "PRICE": "20.00",
+            "DISCOUNT_ON_QUANTITY": "3",
+            "DISCOUNT_PRICE": "19.00",
+            "FREE_QUANTITY": ""
+        },
+        "MUG": {
+            "PRICE": "7.50",
+            "DISCOUNT_ON_QUANTITY": "",
+            "DISCOUNT_PRICE": "",
+            "FREE_QUANTITY": ""
+        }
+    },
+    "CURRENCY":"€"
+}
