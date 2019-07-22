@@ -1,9 +1,9 @@
 # This challenge is solved using combination of **[TypeScript](http://www.typescriptlang.org/)** and **[Node.JS](https://nodejs.org/en/)**.
 
-* The code is based on SOLID priciples. Here I have implemented *IProductDiscount* interface to caluclate discount
-* Any product can consume interface and implement their own calcualte discount strategy
+* The code is based on SOLID principles. Here I have implemented *IProductDiscount* interface to calculate discount
+* Any product can consume interface and implement their own calculate discount strategy
 * The discount strategy is configured in `productConfig.json` file for individual product
-* Classes are under services folder, for eg. `voucher, mug, tshirt` and have their individual calcalation logic independent to other
+* Classes are under services folder, for eg. `voucher, mug, tshirt` and have their individual calculation logic independent to other
 * The entire typescript code are in the **src** folder, output files are in **dist** folder, which will be used for production deployment
 * `app.ts` has responsibility to add products and get billing amount after applying respective product discounts
 
