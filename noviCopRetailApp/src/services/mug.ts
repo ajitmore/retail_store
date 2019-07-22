@@ -1,13 +1,14 @@
-import { IProductDiscount } from "../interfaces/IProductDiscount";
+import { IDiscountCalculator } from "../interfaces/IProductDiscount";
+import { PRODUCTS } from "../productConfig.json";
 
-export class Mug implements IProductDiscount {
+export class Mug implements IDiscountCalculator {
     
     constructor() { }
     
     //Implementation of Calculate Discount method of interface
-    calculateDiscount(quntity: number, productPolicy: any): number {
+    calculate(quantity: number): number {
         let price: number = 0.00;
-        price = quntity * Number(productPolicy.PRICE);
+        price = quantity * Number(PRODUCTS.MUG.PRICE);
         return price;
     }
 }

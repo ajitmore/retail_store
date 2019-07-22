@@ -1,22 +1,18 @@
-import productConfig from "./productConfig.json";
-import { Voucher } from "./services/voucher";
+import { CURRENCY } from "./productConfig.json";
+import { ProductDiscount } from "./product";
+import { Voucher } from "./services/voucher.js";
 import { TShirt } from "./services/tshirt.js";
 import { Mug } from "./services/mug.js";
 
 class Checkout {
     // variable declarations
-    private prodConfig: any = productConfig.PRODUCTS;
-    private voucher: Voucher;
-    private tshirt: TShirt;
-    private mug: Mug;
     private productList: string[];
+    private productDiscount: ProductDiscount;
 
     // Object initialization of classes
     constructor() {
-        this.voucher = new Voucher();
-        this.tshirt = new TShirt();
-        this.mug = new Mug();
         this.productList = [];
+        this.productDiscount = new ProductDiscount();
     }
 
     // Method to scan individual item
@@ -28,7 +24,10 @@ class Checkout {
 
     // Get total billing amount for list of products
     public totalBillingAmount(): void {
-        let totalBillingAmount: number = 0.00;
+        let totalBillingAmount: number = 0,
+            vouchersTotalPrice: number = 0,
+            tshirtsTotalPrice: number = 0,
+            mugsTotalPrice: number = 0;
 
         console.log("Items: " + this.productList);
         
@@ -37,15 +36,25 @@ class Checkout {
                 tshirts: string[] = this.productList.filter((prod) => prod.trim().toLowerCase() === "tshirt"),
                 mugs: string[] = this.productList.filter((prod) => prod.trim().toLowerCase() === "mug");
 
-        
-            let vouchersTotalPrice: number = this.voucher.calculateDiscount(vouchers.length, this.prodConfig.VOUCHER),
-            tshirtsTotalPrice: number = this.tshirt.calculateDiscount(tshirts.length, this.prodConfig.TSHIRT),
-            mugsTotalPrice: number = this.mug.calculateDiscount(mugs.length, this.prodConfig.MUG);
+            if(vouchers.length > 0) {
+                this.productDiscount.setDiscountStrategy(new Voucher());
+                vouchersTotalPrice = this.productDiscount.GetDiscount(vouchers.length);
+            }
+            
+            if(tshirts.length > 0) {
+                this.productDiscount.setDiscountStrategy(new TShirt());
+                tshirtsTotalPrice = this.productDiscount.GetDiscount(tshirts.length);
+            }
+            
+            if(mugs.length > 0) {
+                this.productDiscount.setDiscountStrategy(new Mug());
+                mugsTotalPrice = this.productDiscount.GetDiscount(mugs.length);
+            }
 
             totalBillingAmount = vouchersTotalPrice +  tshirtsTotalPrice + mugsTotalPrice;
             this.productList= [];
         }
-        console.log("Total: " + parseFloat(String(totalBillingAmount)).toFixed(2) + productConfig.CURRENCY);
+        console.log("Total: " + parseFloat(String(totalBillingAmount)).toFixed(2) + CURRENCY);
     }
 }
 
