@@ -15,8 +15,8 @@
 
 ## Steps to execute challenge
 
-1. Clone code from github url
-2. Do `cd noviCopRetailApp`
+1. Clone code `git clone https://github.com/ajitmore/retail_store.git`
+2. Do `cd retail_store/noviCopRetailApp/`
 3. In noviCopRetailApp folder, run `npm install`
 4. then, run `npm run start` or `node ./dist/app.js` to run Node.JS code
 
