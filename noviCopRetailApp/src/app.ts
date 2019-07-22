@@ -1,10 +1,10 @@
 import { CURRENCY } from "./productConfig.json";
 import { ProductDiscount } from "./product";
-import { Voucher } from "./services/voucher.js";
-import { TShirt } from "./services/tshirt.js";
-import { Mug } from "./services/mug.js";
+import { Voucher } from "./services/voucher";
+import { TShirt } from "./services/tshirt";
+import { Mug } from "./services/mug";
 
-class Checkout {
+export class Checkout {
     // variable declarations
     private productList: string[];
     private productDiscount: ProductDiscount;
@@ -23,13 +23,11 @@ class Checkout {
     }
 
     // Get total billing amount for list of products
-    public totalBillingAmount(): void {
+    public totalBillingAmount(): number {
         let totalBillingAmount: number = 0,
             vouchersTotalPrice: number = 0,
             tshirtsTotalPrice: number = 0,
             mugsTotalPrice: number = 0;
-
-        console.log("Items: " + this.productList);
         
         if(this.productList && this.productList.length > 0) {
             let vouchers: string[] = this.productList.filter((prod) => prod.trim().toLowerCase() === "voucher"),
@@ -54,23 +52,28 @@ class Checkout {
             totalBillingAmount = vouchersTotalPrice +  tshirtsTotalPrice + mugsTotalPrice;
             this.productList= [];
         }
-        console.log("Total: " + parseFloat(String(totalBillingAmount)).toFixed(2) + CURRENCY);
+        return parseFloat(String(totalBillingAmount));
+        
     }
 }
 
 // Checkout class object initiation with different products combination
-var co = new Checkout();
+let co = new Checkout();
+let totalBill: number = 0;
 co.scan("VOUCHER");
 co.scan("TSHIRT");
 co.scan("MUG");
-co.totalBillingAmount();
-
+totalBill = co.totalBillingAmount();
+console.log("Items: VOUCHER, TSHIRT, MUG");
+console.log("Total: " + totalBill.toFixed(2) + CURRENCY);
 console.log("\n");
 
 co.scan("VOUCHER");
 co.scan("TSHIRT");
 co.scan("VOUCHER");
-co.totalBillingAmount();
+totalBill = co.totalBillingAmount();
+console.log("Items: VOUCHER, TSHIRT, VOUCHER");
+console.log("Total: " + totalBill.toFixed(2) + CURRENCY);
 
 console.log("\n");
 
@@ -79,7 +82,9 @@ co.scan("TSHIRT");
 co.scan("TSHIRT");
 co.scan("VOUCHER");
 co.scan("TSHIRT");
-co.totalBillingAmount();
+totalBill = co.totalBillingAmount();
+console.log("Items: TSHIRT, TSHIRT, TSHIRT, VOUCHER, TSHIRT");
+console.log("Total: " + totalBill.toFixed(2) + CURRENCY);
 
 console.log("\n"); 
 
@@ -90,4 +95,6 @@ co.scan("VOUCHER");
 co.scan("MUG");
 co.scan("TSHIRT");
 co.scan("TSHIRT");
-co.totalBillingAmount();
+totalBill = co.totalBillingAmount();
+console.log("Items: VOUCHER, TSHIRT, VOUCHER, VOUCHER, MUG, TSHIRT, TSHIRT");
+console.log("Total: " + totalBill.toFixed(2) + CURRENCY);
