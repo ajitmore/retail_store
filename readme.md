@@ -38,7 +38,7 @@ File      |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
 All files |        0 |        0 |        0 |        0 |                   |
 ----------|----------|----------|----------|----------|-------------------|
 ```
-5. Open coverage/Icov-report/index.html* to code coverage report.
+5. Open *coverage/Icov-report/index.html* to code coverage report.
 6. then, run `npm run start` or `node ./dist/app.js` to run Node.JS code
 
 The output will look like as below
